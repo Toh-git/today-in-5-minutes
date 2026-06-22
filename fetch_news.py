@@ -1,7 +1,6 @@
 import feedparser
 <<<<<<< HEAD
 =======
-
 >>>>>>> f7f46d3814040c270e2e74dcd30c9f45a2b88f49
 weblist =(
     {'url': "https://feeds.bbci.co.uk/news/rss.xml", "name":"BBC"},
