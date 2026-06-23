@@ -1,0 +1,36 @@
+name: Auto Fetch News Feeds
+
+on:
+  schedule:
+    # สั่งให้ทำงานอัตโนมัติทุกๆ 6 ชั่วโมง (ปรับเวลาได้ตามใจชอบ)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # ปุ่มกดสั่งให้รันเองแบบ Manual บนเว็บ GitHub
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install feedparser
+
+    - name: Run Python Script
+      run: |
+        python3 fetch_news.py
+
+    - name: Commit and Push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add index.html
+        # บันทึกและส่งไฟล์ index.html ที่อัปเดตใหม่กลับเข้า Repository
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update news index" && git push)
