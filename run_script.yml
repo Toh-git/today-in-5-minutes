@@ -3,7 +3,7 @@ name: Auto Fetch News Feeds
 on:
   schedule:
     # สั่งให้ทำงานอัตโนมัติทุกๆ 6 ชั่วโมง (ปรับเวลาได้ตามใจชอบ)
-    - cron: '0 */6 * * *'
+    - cron: '0 */12 * * *'
   workflow_dispatch: # ปุ่มกดสั่งให้รันเองแบบ Manual บนเว็บ GitHub
 
 jobs:
